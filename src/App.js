@@ -1,8 +1,7 @@
-import { Button, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import { useState } from "react";
 import FileUploader from "./components/FileUpload";
-import TeamsList from "./components/TeamsList";
-import Team from "./components/Team";
+import TeamsList from "./components/Team/TeamsList";
 
 function App() {
     const [teams, setTeams] = useState([]);
@@ -13,10 +12,15 @@ function App() {
 
     return (
         <>
-            <Grid container direction="row" justifyContent="center" alignItems="flex-start" spacing={10}>
-                <Grid item xs={3}>
-                    <TeamsList teams={teams} />
-                </Grid>
+            <Grid
+                container
+                direction="row"
+                justifyContent="center"
+                alignItems="flex-start"
+                rowSpacing={2}
+                columnSpacing={2}
+            >
+                <TeamsList teams={teams} />
             </Grid>
             <FileUploader onFileUpload={addTeam} />
         </>

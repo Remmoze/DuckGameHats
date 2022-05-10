@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import Canvas from "./Canvas";
-import { createNewImage } from "./utils";
+import Canvas from "../Canvas";
+import { createNewImage } from "../utils";
 
 // 97 56
-import Template from "../media/colors_only.png";
-import Example from "../media/templateVisual.png";
+import Template from "../../media/colors_only.png";
+import Example from "../../media/templateVisual.png";
 
 const TeamDisplay = ({ hatImage }) => {
     const [base, setBase] = useState(null);
@@ -21,7 +21,7 @@ const TeamDisplay = ({ hatImage }) => {
             context.drawImage(base, 0, 0, base.width * 5, base.height * 5);
         }
         if (hatImg !== null) {
-            context.drawImage(hatImg, 0, 0, base.width * 5, base.height * 5);
+            context.drawImage(hatImg, 0, 0, 97, 56, 0, 0, base.width * 5, base.height * 5);
         }
     };
 
