@@ -10,6 +10,10 @@ function App() {
         setTeams((teams) => [...teams, imageUrl]);
     };
 
+    const DeleteTeam = (id) => {
+        setTeams((teams) => teams.filter((team) => team !== id));
+    };
+
     return (
         <>
             <Grid
@@ -20,7 +24,7 @@ function App() {
                 rowSpacing={2}
                 columnSpacing={2}
             >
-                <TeamsList teams={teams} />
+                <TeamsList teams={teams} onDelete={DeleteTeam} />
             </Grid>
             <FileUploader onFileUpload={addTeam} />
         </>

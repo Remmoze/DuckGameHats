@@ -1,11 +1,11 @@
 import Team from "./Team";
 import { Grid } from "@mui/material";
 
-const TeamsList = ({ teams }) => {
+const TeamsList = ({ teams, onDelete }) => {
     if (teams.length === 0) {
         return (
             <Grid item>
-                <Team hatImage={null} />
+                <Team hatImage={null} onDelete={() => {}} />
             </Grid>
         );
     }
@@ -14,7 +14,7 @@ const TeamsList = ({ teams }) => {
         <>
             {teams.map((team) => (
                 <Grid item key={team}>
-                    <Team hatImage={team} />
+                    <Team hatImage={team} onDelete={onDelete} />
                 </Grid>
             ))}
         </>
