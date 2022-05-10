@@ -18,11 +18,6 @@ const FileUploader = ({ onFileUpload }) => {
             <Button
                 variant="contained"
                 size="large"
-                sx={{
-                    position: "fixed",
-                    top: 15,
-                    right: 15,
-                }}
                 onClick={() => uploadInputRef.current && uploadInputRef.current.click()}
             >
                 Add Team

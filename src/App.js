@@ -1,6 +1,7 @@
 import { Grid } from "@mui/material";
+import { Box } from "@mui/system";
 import { useState } from "react";
-import FileUploader from "./components/FileUpload";
+import Menu from "./components/Menu";
 import TeamsList from "./components/Team/TeamsList";
 
 function App() {
@@ -10,8 +11,12 @@ function App() {
         setTeams((teams) => [...teams, imageUrl]);
     };
 
-    const DeleteTeam = (id) => {
+    const deleteTeam = (id) => {
         setTeams((teams) => teams.filter((team) => team !== id));
+    };
+
+    const deleteAll = () => {
+        setTeams([]);
     };
 
     return (
@@ -24,9 +29,17 @@ function App() {
                 rowSpacing={2}
                 columnSpacing={2}
             >
-                <TeamsList teams={teams} onDelete={DeleteTeam} />
+                <TeamsList teams={teams} onDelete={deleteTeam} />
             </Grid>
-            <FileUploader onFileUpload={addTeam} />
+            <Box
+                sx={{
+                    position: "fixed",
+                    top: 15,
+                    right: 15,
+                }}
+            >
+                <Menu addTeam={addTeam} deleteAll={deleteAll} />
+            </Box>
         </>
     );
 }
