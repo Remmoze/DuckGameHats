@@ -13,7 +13,7 @@ const TeamDisplay = ({ hatImage }) => {
     useEffect(() => {
         createNewImage(Template).then(setBase);
         createNewImage(hatImage === null ? Example : hatImage).then(setHatImg);
-    }, []);
+    }, [hatImage]);
 
     const canvasUpdate = (context) => {
         context.imageSmoothingEnabled = false;

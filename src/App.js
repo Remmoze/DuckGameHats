@@ -1,18 +1,24 @@
-import { Button, Grid, Paper } from "@mui/material";
+import { Button, Grid } from "@mui/material";
+import { useState } from "react";
+import FileUploader from "./components/FileUpload";
 import TeamsList from "./components/TeamsList";
+import Team from "./components/Team";
 
 function App() {
+    const [teams, setTeams] = useState([]);
+
+    const addTeam = (imageUrl) => {
+        setTeams((teams) => [...teams, imageUrl]);
+    };
+
     return (
         <>
-            <Grid container direction="row" justifyContent="space-between" alignItems="flex-start">
-                <Grid item>aaaaaaaaaaaa</Grid>
-                <Grid item width={500} height={280}>
-                    <TeamsList />
+            <Grid container direction="row" justifyContent="center" alignItems="flex-start" spacing={10}>
+                <Grid item xs={3}>
+                    <TeamsList teams={teams} />
                 </Grid>
-                <Button onClick={() => {}} variant="contained">
-                    Add Team
-                </Button>
             </Grid>
+            <FileUploader onFileUpload={addTeam} />
         </>
     );
 }
