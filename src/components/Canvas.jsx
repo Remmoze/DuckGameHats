@@ -1,3 +1,5 @@
+import { useRef, useEffect } from "react";
+
 const useCanvas = (draw) => {
     const canvasRef = useRef(null);
 
@@ -20,10 +22,10 @@ const useCanvas = (draw) => {
     return canvasRef;
 };
 
-const Canvas = (update) => {
+const Canvas = ({ update, width, height }) => {
     const canvasRef = useCanvas(update);
 
-    return <canvas ref={canvasRef} width={400} height={200} />;
+    return <canvas ref={canvasRef} width={width} height={height} />;
 };
 
 export default Canvas;

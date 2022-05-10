@@ -1,15 +1,7 @@
-import { Paper } from "@mui/material";
+import TeamDisplay from "./TeamDisplay";
 
-import Template from "../media/template.png";
-
-const Team = () => {
-    return (
-        <>
-            <Paper sx={{ backgroundColor: "#222" }}>
-                <img width={200} src={Template}></img>
-            </Paper>
-        </>
-    );
+const Team = ({ hatImage }) => {
+    return <TeamDisplay hatImage={hatImage || null} />;
 };
 
 export default Team;

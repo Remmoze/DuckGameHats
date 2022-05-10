@@ -7,3 +7,5 @@ const createNewImage = (newUrl) => {
         });
     });
 };
+
+export { createNewImage };
