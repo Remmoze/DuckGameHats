@@ -2,6 +2,8 @@ import { Button, Grid, IconButton, TextField } from "@mui/material";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import InfoIcon from "@mui/icons-material/Info";
 
+import fileDownload from "js-file-download";
+
 const TeamSettings = ({ name, setName, disabled, onDelete, data }) => {
     return (
         <Grid container direction="row" justifyContent="space-between" alignItems="flex-end">
@@ -20,7 +22,12 @@ const TeamSettings = ({ name, setName, disabled, onDelete, data }) => {
                 <Grid item>
                     <Grid container direction="row" justifyContent="flex-end" alignItems="baseline">
                         <Grid item>
-                            <Button size="small" variant="outlined">
+                            <Button
+                                size="small"
+                                variant="outlined"
+                                disabled={name === ""}
+                                onClick={() => fileDownload("This is just an example.", name + ".txt")}
+                            >
                                 Export .hat
                             </Button>
                         </Grid>

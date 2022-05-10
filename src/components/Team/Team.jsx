@@ -5,7 +5,7 @@ import { useState } from "react";
 import TeamSettings from "./TeamSettings";
 
 const Team = ({ data, onDelete }) => {
-    const [disabled] = useState(data?.image === null);
+    const [disabled] = useState(data === null);
     const [name, setName] = useState("");
 
     return (
