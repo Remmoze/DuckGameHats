@@ -4,8 +4,8 @@ import TeamDisplay from "./TeamDisplay";
 import { useState } from "react";
 import TeamSettings from "./TeamSettings";
 
-const Team = ({ hatImage, onDelete }) => {
-    const [disabled] = useState(hatImage === null);
+const Team = ({ data, onDelete }) => {
+    const [disabled] = useState(data?.image === null);
     const [name, setName] = useState("");
 
     return (
@@ -20,11 +20,11 @@ const Team = ({ hatImage, onDelete }) => {
         >
             <Grid container direction="column" justifyContent="space-between" alignItems="stretch">
                 <Grid item>
-                    <TeamSettings onDelete={onDelete} id={hatImage} name={name} setName={setName} disabled={disabled} />
+                    <TeamSettings data={data} onDelete={onDelete} name={name} setName={setName} disabled={disabled} />
                 </Grid>
                 <Grid item>
                     <Box mt={1} sx={{ border: "1px solid #000" }}>
-                        <TeamDisplay hatImage={hatImage || null} />
+                        <TeamDisplay data={data || null} />
                     </Box>
                 </Grid>
             </Grid>

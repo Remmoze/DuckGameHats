@@ -2,7 +2,7 @@ import { Button, Grid, IconButton, TextField } from "@mui/material";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import InfoIcon from "@mui/icons-material/Info";
 
-const TeamSettings = ({ name, setName, disabled, onDelete, id }) => {
+const TeamSettings = ({ name, setName, disabled, onDelete, data }) => {
     return (
         <Grid container direction="row" justifyContent="space-between" alignItems="flex-end">
             <Grid item>
@@ -30,7 +30,7 @@ const TeamSettings = ({ name, setName, disabled, onDelete, id }) => {
                             </IconButton>
                         </Grid>
                         <Grid item pl={2}>
-                            <IconButton onClick={() => onDelete(id)}>
+                            <IconButton onClick={() => onDelete(data.id)}>
                                 <DeleteForeverIcon sx={{ color: "red" }} />
                             </IconButton>
                         </Grid>

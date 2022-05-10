@@ -3,16 +3,18 @@ import { Box } from "@mui/system";
 import { useState } from "react";
 import Menu from "./components/Menu";
 import TeamsList from "./components/Team/TeamsList";
+import { createTeam } from "./components/TeamData";
 
 function App() {
     const [teams, setTeams] = useState([]);
 
-    const addTeam = (imageUrl) => {
-        setTeams((teams) => [...teams, imageUrl]);
+    const addTeam = async (imageUrl) => {
+        let team = await createTeam(imageUrl);
+        setTeams((teams) => [...teams, team]);
     };
 
     const deleteTeam = (id) => {
-        setTeams((teams) => teams.filter((team) => team !== id));
+        setTeams((teams) => teams.filter((team) => team.id !== id));
     };
 
     const deleteAll = () => {

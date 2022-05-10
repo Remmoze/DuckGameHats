@@ -6,14 +6,18 @@ import { createNewImage } from "../utils";
 import Template from "../../media/colors_only.png";
 import Example from "../../media/templateVisual.png";
 
-const TeamDisplay = ({ hatImage }) => {
+const TeamDisplay = ({ data }) => {
     const [base, setBase] = useState(null);
     const [hatImg, setHatImg] = useState(null);
 
     useEffect(() => {
         createNewImage(Template).then(setBase);
-        createNewImage(hatImage === null ? Example : hatImage).then(setHatImg);
-    }, [hatImage]);
+        if (data === null) {
+            createNewImage(Example).then(setHatImg);
+        } else {
+            setHatImg(data.image);
+        }
+    }, [data]);
 
     const canvasUpdate = (context) => {
         context.imageSmoothingEnabled = false;
