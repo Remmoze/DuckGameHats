@@ -4,7 +4,16 @@ import InfoIcon from "@mui/icons-material/Info";
 
 import fileDownload from "js-file-download";
 
-import { test } from "../HatEncoder/GenerateHat";
+import { GenerateHatFile, makeSafeName } from "../HatEncoder/GenerateHat";
+
+const SaveHat = (name, data) => {
+    name = makeSafeName(name);
+    if (name.trim() === "") {
+        name = makeSafeName(Math.random().toString(16).substring(8));
+    }
+    let file = GenerateHatFile(name, data.type, data.fileBase64);
+    fileDownload(file, name + ".hat");
+};
 
 const TeamSettings = ({ name, setName, disabled, onDelete, data }) => {
     return (
@@ -28,7 +37,7 @@ const TeamSettings = ({ name, setName, disabled, onDelete, data }) => {
                                 size="small"
                                 variant="outlined"
                                 disabled={name === ""}
-                                onClick={() => fileDownload(test(name, data.test), name + ".hat")}
+                                onClick={() => SaveHat(name, data)}
                             >
                                 Export .hat
                             </Button>

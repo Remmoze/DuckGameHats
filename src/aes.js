@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 /*
  * aes.js: implements AES - Advanced Encryption Standard
  * from the SlowAES project, http://code.google.com/p/slowaes/

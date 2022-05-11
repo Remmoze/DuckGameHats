@@ -10,47 +10,39 @@ const hatCapeMagicNo = [225, 50, 133, 154, 95, 61, 2, 0];
 
 const generateIV = () => Array.from(Array(16), () => Math.floor(Math.random() * 256));
 
-const toString = (bytes) => bytes.map((byte) => String.fromCharCode(parseInt(byte))).join("");
-
 const fromString = (str) => str.split("").map((char) => char.charCodeAt(0));
 
-const getBase64FromImage = (image) => {
-    const canvas = document.createElement("canvas");
-    const context = canvas.getContext("2d");
-    canvas.width = image.width;
-    canvas.height = image.height;
-    context.drawImage(image, 0, 0);
-    let url = canvas.toDataURL("image/png");
-    return url.replace(/^data:image\/(png|jpg);base64,/, "");
+const dataURLToBase64 = (dataURL) => dataURL.substring(dataURL.indexOf(",") + 1);
+
+const makeSafeName = (name) => {
+    return name
+        .toLowerCase()
+        .replace(/[^0-9a-z ]/g, "")
+        .split(" ")
+        .filter((x) => x.length > 0)
+        .map((s) => s[0].toUpperCase() + s.substring(1))
+        .join("");
 };
 
-function getIntBytes(x) {
-    var bytes = [];
-    var i = 4;
-    do {
-        bytes[--i] = x & 255;
-        x = x >> 8;
-    } while (i);
+const getIntBytes = (x) => {
+    const bytes = [];
+    for (let i = 3; i >= 0; i--) {
+        bytes[i] = x & 255;
+        x >>= 8;
+    }
     return bytes.reverse();
-}
+};
 
-const GenerateHatContent = (name, image) => {
+const GenerateHatContent = (name, type, imageUrl) => {
     const IV = generateIV();
-    const xIV = toString(IV); // useless?
-    //fix this this is not right
-    const magic = image.type === "cape" ? hatCapeMagicNo : hatMagicNo;
+    const magic = type === "small" ? hatMagicNo : hatCapeMagicNo;
     const byteName = fromString(name);
     const encData = [];
     encData.push(...magic);
     encData.push(byteName.length);
     encData.push(...byteName);
 
-    console.log(image);
-    console.log(getBase64FromImage(image));
-    console.log(atob(getBase64FromImage(image)));
-    console.log(fromString(atob(getBase64FromImage(image))));
-
-    const imageData = fromString(atob(getBase64FromImage(image)));
+    const imageData = fromString(atob(dataURLToBase64(imageUrl)));
     encData.push(...getIntBytes(imageData.length));
     encData.push(...imageData);
 
@@ -61,44 +53,11 @@ const GenerateHatContent = (name, image) => {
     return saveData;
 };
 
-const GenerateHatFile = (name, image) => {
-    return new Blob([new Uint8Array(GenerateHatContent(name, image))], { type: "application/octet-stream" });
+const GenerateHatFile = (name, type, imageUrl) => {
+    return new Blob([new Uint8Array(GenerateHatContent(name, type, imageUrl))], { type: "application/octet-stream" });
 };
 
-function dataURLToBase64(dataURL) {
-    return dataURL.substring(dataURL.indexOf(",") + 1);
-}
-
-const test = (name, blob) => {
-    debugger;
-    const IV = generateIV();
-    const xIV = toString(IV); // useless?
-    //fix this this is not right
-    const magic = hatMagicNo;
-    const byteName = fromString(name);
-    const encData = [];
-    encData.push(...magic);
-    encData.push(byteName.length);
-    encData.push(...byteName);
-
-    console.log(blob);
-    console.log(dataURLToBase64(blob));
-    console.log(atob(dataURLToBase64(blob)));
-    console.log(fromString(atob(dataURLToBase64(blob))));
-
-    const imageData = fromString(atob(dataURLToBase64(blob)));
-    encData.push(...getIntBytes(imageData.length));
-    encData.push(...imageData);
-
-    const saveData = [];
-    saveData.push(...getIntBytes(IV.length));
-    saveData.push(...IV);
-    saveData.push(...slowAES.encrypt(encData, 2, key, IV)); // encrypt
-
-    return new Blob([new Uint8Array(saveData)], { type: "application/octet-stream" });
-};
-
-export { GenerateHatFile, test };
+export { GenerateHatFile, makeSafeName };
 
 /*
 function generateHatFile(team) {
