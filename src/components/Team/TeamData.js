@@ -1,4 +1,4 @@
-import { createNewImage } from "./utils";
+import { createNewImage } from "../utils";
 
 const getType = (width, height) => {
     if (width === 64 && height === 32) {

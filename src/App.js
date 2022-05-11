@@ -3,7 +3,7 @@ import { Box } from "@mui/system";
 import { useState } from "react";
 import Menu from "./components/Menu";
 import TeamsList from "./components/Team/TeamsList";
-import { createTeam } from "./components/TeamData";
+import { createTeam } from "./components/Team/TeamData";
 
 function App() {
     const [teams, setTeams] = useState([]);

@@ -4,7 +4,8 @@ import InfoIcon from "@mui/icons-material/Info";
 
 import fileDownload from "js-file-download";
 
-import { GenerateHatFile, makeSafeName } from "../HatEncoder/GenerateHat";
+import { GenerateHatFile, makeSafeName } from "../HatManipulation/GenerateHat";
+import { extractMetaPixels } from "../HatManipulation/MetaExtraction";
 
 const SaveHat = (name, data) => {
     name = makeSafeName(name);
@@ -45,7 +46,11 @@ const TeamSettings = ({ name, setName, disabled, onDelete, data }) => {
                             </Button>
                         </Grid>
                         <Grid item pl={1}>
-                            <IconButton>
+                            <IconButton
+                                onClick={() => {
+                                    console.log(extractMetaPixels(data.image));
+                                }}
+                            >
                                 <InfoIcon sx={{ color: "#eee" }} />
                             </IconButton>
                         </Grid>

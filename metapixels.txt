@@ -1,0 +1,86 @@
+[Metapixel(1, "Hat Offset", "Hat offset position in pixels")]
+public MDVec2 HatOffset = new MDVec2() { range = 16.0f };
+
+[Metapixel(2, "Use Duck Color", "If this metapixel exists, White (255, 255, 255) and Grey(157, 157, 157) will be recolored to duck colors.")]
+public MDBool UseDuckColor = new MDBool() { };
+
+//Capes  
+//-------------------------------------------------------------------------------
+[Metapixel(10, "Cape Offset", "Cape offset position in pixels")]
+public MDVec2 CapeOffset = new MDVec2() { range = 16.0f };
+[Metapixel(11, "Cape Is Foreground", "If this metapixel exists, the cape will be drawn over the duck.")]
+public MDBool CapeForeground = new MDBool();
+[Metapixel(12, "Cape Sway Modifier", "Affects cape length, and left to right sway.")]
+public MDVec2Normalized CapeSwayModifier = new MDVec2Normalized() { value = new Vec2(0.3f, 1.0f), allowNegative = true };
+[Metapixel(13, "Cape Wiggle Modifier", "Affects how much the cape wiggles in the wind.")]
+public MDVec2Normalized CapeWiggleModifier = new MDVec2Normalized() { value = new Vec2(1.0f, 1.0f), allowNegative = true };
+[Metapixel(14, "Cape Taper Start", "Affects how narrow the cape/trail is at the top/beginning.")]
+public MDFloat CapeTaperStart = new MDFloat() { value = 0.5f };
+[Metapixel(15, "Cape Taper End", "Affects how narrow the cape/trail is at the bottom/end.")]
+public MDFloat CapeTaperEnd = new MDFloat() { value = 1.0f };
+[Metapixel(16, "Cape Alpha Start", "Affects how transparent the cape/trail is at the top/beginning.")]
+public MDFloat CapeAlphaStart = new MDFloat() { value = 1.0f };
+[Metapixel(17, "Cape Alpha End", "Affects how transparent the cape/trail is at the bottom/end.")]
+public MDFloat CapeAlphaEnd = new MDFloat() { value = 1.0f };
+[Metapixel(20, "Cape Is Trail", "If this metapixel exists, the cape will be a trail instead of a cape (think of the rainbow trail left by the TV object).")]
+public MDBool CapeIsTrail = new MDBool();
+
+
+
+//Particles 
+//-------------------------------------------------------------------------------
+[Metapixel(30, "Particle Emitter Offset", "The offset in pixels from the center of the hat where particles will be emitted.")]
+public MDVec2 ParticleEmitterOffset = new MDVec2() { range = 16.0f };
+[Metapixel(31, "Particle Default Behavior", "B defines a particle behavior from a list of presets: 0 = No Behavior, 1 = Spit, 2 = Burst, 3 = Halo, 4 = Exclamation")]
+public MDInt ParticleDefaultBehavior = new MDInt() { range = 4, postParseScript = ApplyDefaultParticleBehavior };
+[Metapixel(32, "Particle Emit Shape", "G: 0 = Point, 1 = Circle, 2 = Box   B: 0 = Emit Around Shape Border Randomly, 1 = Fill Shape Randomly, 2 = Emit Around Shape Border Uniformly")]
+public MDIntPair ParticleEmitShape = new MDIntPair() { rangeX = 2, rangeY = 2 };
+[Metapixel(33, "Particle Emit Shape Size", "X and Y size of the particle emitter (in pixels)")]
+public MDVec2 ParticleEmitShapeSize = new MDVec2() { range = 24.0f, value = new Vec2(24, 24) };
+[Metapixel(34, "Particle Count", "The number of particles to emit.")]
+public MDInt ParticleCount = new MDInt() { range = 8, value = 4 };
+[Metapixel(35, "Particle Lifespan", "Life span of the particle, in seconds.")]
+public MDFloat ParticleLifespan = new MDFloat() { range = 2.0f, value = 1.0f };
+[Metapixel(36, "Particle Velocity", "Initial velocity of the particle.")]
+public MDVec2Normalized ParticleVelocity = new MDVec2Normalized() { range = 2.0f };
+[Metapixel(37, "Particle Gravity", "Gravity applied to the particle.")]
+public MDVec2Normalized ParticleGravity = new MDVec2Normalized() { range = 2.0f, value = new Vec2(0.0f, PhysicsObject.gravity) };
+[Metapixel(38, "Particle Friction", "Friction applied to the particle (The value it's velocity is multiplied by every frame).")]
+public MDVec2Normalized ParticleFriction = new MDVec2Normalized() { range = 1.0f, allowNegative = false, value = new Vec2(1.0f, 1.0f) };
+[Metapixel(39, "Particle Alpha", "G = Start alpha, B = End alpha")]
+public MDVec2Normalized ParticleAlpha = new MDVec2Normalized() { range = 1.0f, allowNegative = false, value = new Vec2(1.0f, 1.0f) };
+[Metapixel(40, "Particle Scale", "G = Start scale, B = End scale")]
+public MDVec2Normalized ParticleScale = new MDVec2Normalized() { range = 2.0f, allowNegative = false, value = new Vec2(1.0f, 0.0f) };
+[Metapixel(41, "Particle Rotation", "G = Start rotation, B = End rotation")]
+public MDVec2Normalized ParticleRotation = new MDVec2Normalized() { range = 36.0f, value = new Vec2(0.0f, 0.0f) };
+[Metapixel(42, "Particle Offset", "Additional X Y offset of particle.")]
+public MDVec2 ParticleOffset = new MDVec2() { range = 16 };
+[Metapixel(43, "Particle Background", "If this metapixel exists, particles will be rendered behind the duck.")]
+public MDBool ParticleBackground = new MDBool();
+[Metapixel(44, "Particle Anchor", "If this metapixel exists, particles will stay anchored around the hat position when it's moving.")]
+public MDBool ParticleAnchor = new MDBool();
+
+[Metapixel(45, "Particle Animated", "If this metapixel exists, particles will animate through their frames. Otherwise, a frame will be picked randomly.")]
+public MDBool ParticleAnimated = new MDBool();
+[Metapixel(46, "Particle Animation Loop", "If this metapixel exists, the particle animation will loop.")]
+public MDBool ParticleAnimationLoop = new MDBool();
+[Metapixel(47, "Particle Animation Random Frame", "If this metapixel exists, the particle animation will start on a random frame.")]
+public MDBool ParticleAnimationRandomFrame = new MDBool();
+[Metapixel(48, "Particle Animation Speed", "How quickly the particle animates.")]
+public MDFloat ParticleAnimationSpeed = new MDFloat() { range = 1.0f, value = 0.1f };
+
+//Strange
+//-------------------------------------------------------------------------------
+[Metapixel(70, "Wet Lips", "If this metapixel exists, the hat will have 'wet lips'.")]
+public MDBool WetLips = new MDBool();
+[Metapixel(71, "Mechanical Lips", "If this metapixel exists, the hat will have 'mechanical lips'.")]
+public MDBool MechanicalLips = new MDBool();
+
+//Special
+//-------------------------------------------------------------------------------
+[Metapixel(100, "Randomize Parameter X", "If present, the previously defined metapixel value will have a random number between G and B applied to its X value each time it's used. This will generally only work with particles..")]
+public MDRandomizer RandomizeParameterX = new MDRandomizer() { range = 1.0f, allowNegative = true };
+[Metapixel(101, "Randomize Parameter Y", "If present, the previously defined metapixel value will have a random number between G and B applied to its X value each time it's used. This will generally only work with particles..")]
+public MDRandomizer RandomizeParameterY = new MDRandomizer() { range = 1.0f, allowNegative = true };
+[Metapixel(102, "Randomize Parameter", "If present, the previously defined metapixel value will have a random number between G and B applied to its X and Y values each time it's used. This will generally only work with particles..")]
+public MDRandomizer RandomizeParameter = new MDRandomizer() { range = 1.0f, allowNegative = true, randomizeBoth = true };
