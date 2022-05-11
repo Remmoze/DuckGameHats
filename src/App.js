@@ -1,4 +1,4 @@
-import { Grid } from "@mui/material";
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid } from "@mui/material";
 import { Box } from "@mui/system";
 import { useState } from "react";
 import Menu from "./components/Menu";
@@ -9,6 +9,8 @@ function App() {
     const [teams, setTeams] = useState([]);
     const [showbase, setShowBase] = useState(true);
     const [showDuck, setShowDuck] = useState(true);
+
+    const [showWelcome, setShowWelcome] = useState(true);
 
     const addTeam = async (imageUrl, file) => {
         let team = await createTeam(imageUrl, file);
@@ -25,6 +27,13 @@ function App() {
 
     return (
         <>
+            <Dialog open={showWelcome} onClose={() => setShowWelcome(false)}>
+                <DialogTitle>Hello!</DialogTitle>
+                <DialogContent>This site is still heavily under construction. No criticism needed.</DialogContent>
+                <DialogActions>
+                    <Button onClick={() => setShowWelcome(false)}>ok</Button>
+                </DialogActions>
+            </Dialog>
             <Grid
                 container
                 direction="row"

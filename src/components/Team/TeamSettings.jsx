@@ -30,7 +30,7 @@ const TeamSettings = ({ name, setName, disabled, onDelete, data }) => {
                     error={name === ""}
                     label="Name"
                     variant="filled"
-                    value={disabled ? "Default hat" : name}
+                    value={name}
                     disabled={disabled}
                     onChange={({ target }) => setName(target.value)}
                 />
