@@ -4,7 +4,7 @@ import TeamDisplay from "./TeamDisplay";
 import { useState } from "react";
 import TeamSettings from "./TeamSettings";
 
-const Team = ({ data, onDelete }) => {
+const Team = ({ data, onDelete, showbase, showDuck }) => {
     const [disabled] = useState(data === null);
     const [name, setName] = useState("");
 
@@ -24,7 +24,7 @@ const Team = ({ data, onDelete }) => {
                 </Grid>
                 <Grid item>
                     <Box mt={1} sx={{ border: "1px solid #000" }}>
-                        <TeamDisplay data={data || null} />
+                        <TeamDisplay {...{ showbase, showDuck }} data={data || null} />
                     </Box>
                 </Grid>
             </Grid>

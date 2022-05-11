@@ -7,6 +7,8 @@ import { createTeam } from "./components/TeamData";
 
 function App() {
     const [teams, setTeams] = useState([]);
+    const [showbase, setShowBase] = useState(true);
+    const [showDuck, setShowDuck] = useState(true);
 
     const addTeam = async (imageUrl, file) => {
         let team = await createTeam(imageUrl, file);
@@ -31,7 +33,7 @@ function App() {
                 rowSpacing={2}
                 columnSpacing={2}
             >
-                <TeamsList teams={teams} onDelete={deleteTeam} />
+                <TeamsList {...{ teams, showbase, showDuck }} onDelete={deleteTeam} />
             </Grid>
             <Box
                 sx={{
@@ -40,7 +42,7 @@ function App() {
                     right: 15,
                 }}
             >
-                <Menu addTeam={addTeam} deleteAll={deleteAll} />
+                <Menu {...{ addTeam, deleteAll, showbase, setShowBase, showDuck, setShowDuck }} />
             </Box>
         </>
     );

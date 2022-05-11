@@ -5,13 +5,19 @@ import { createNewImage } from "../utils";
 // 97 56
 import Template from "../../media/colors_only.png";
 import Example from "../../media/templateVisual.png";
+import Duck from "../../media/template_duck.png";
+import Transparent from "../../media/transparent.png";
 
-const TeamDisplay = ({ data }) => {
+const TeamDisplay = ({ data, showbase, showDuck }) => {
     const [base, setBase] = useState(null);
+    const [duck, setDuck] = useState(null);
     const [hatImg, setHatImg] = useState(null);
+    const [trans, setTrans] = useState(null);
 
     useEffect(() => {
         createNewImage(Template).then(setBase);
+        createNewImage(Duck).then(setDuck);
+        createNewImage(Transparent).then(setTrans);
         if (data === null) {
             createNewImage(Example).then(setHatImg);
         } else {
@@ -20,12 +26,27 @@ const TeamDisplay = ({ data }) => {
     }, [data]);
 
     const canvasUpdate = (context) => {
+        if (trans === null || data === null) {
+            context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+        } else {
+            context.drawImage(trans, 0, 0, base.width * 5, base.height * 5);
+        }
+
         context.imageSmoothingEnabled = false;
-        if (base !== null) {
+        if (base !== null && (showbase || hatImg === null)) {
             context.drawImage(base, 0, 0, base.width * 5, base.height * 5);
         }
+        if (duck !== null && (showDuck || hatImg === null)) {
+            context.drawImage(duck, 0, 0, base.width * 5, base.height * 5);
+        }
+
         if (hatImg !== null) {
             context.drawImage(hatImg, 0, 0, 97, 56, 0, 0, base.width * 5, base.height * 5);
+            if (showbase) {
+                context.lineWidth = 2;
+                context.strokeStyle = "#FFF0F0";
+                context.strokeRect(0, 0, hatImg.width * 5, hatImg.height * 5);
+            }
         }
     };
 

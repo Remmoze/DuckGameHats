@@ -20,6 +20,8 @@ const TeamSettings = ({ name, setName, disabled, onDelete, data }) => {
         <Grid container direction="row" justifyContent="space-between" alignItems="flex-end">
             <Grid item>
                 <TextField
+                    sx={{ input: { color: "white" } }}
+                    color="secondary"
                     size="small"
                     error={name === ""}
                     label="Name"

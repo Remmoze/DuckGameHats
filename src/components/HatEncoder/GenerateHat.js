@@ -49,7 +49,7 @@ const GenerateHatContent = (name, type, imageUrl) => {
     const saveData = [];
     saveData.push(...getIntBytes(IV.length));
     saveData.push(...IV);
-    saveData.push(...slowAES.encrypt(encData, 2, key, IV)); // encrypt
+    saveData.push(...slowAES.encrypt(encData, 2, key, IV));
     return saveData;
 };
 
