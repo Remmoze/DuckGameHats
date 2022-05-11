@@ -48,12 +48,14 @@ const TeamSettings = ({ name, setName, disabled, onDelete, data }) => {
                                 Export .hat
                             </Button>
                         </Grid>
-                        <Grid item pl={1}>
-                            <IconButton onClick={() => setShowDialog(true)}>
-                                <InfoIcon sx={{ color: "#eee" }} />
-                            </IconButton>
-                            <MetaPixelsDialog {...{ name, showDialog, setShowDialog, image: data.image }} />
-                        </Grid>
+                        {data.type === "full" && (
+                            <Grid item pl={1}>
+                                <IconButton onClick={() => setShowDialog(true)}>
+                                    <InfoIcon sx={{ color: "#eee" }} />
+                                </IconButton>
+                                <MetaPixelsDialog {...{ name, showDialog, setShowDialog, image: data.image }} />
+                            </Grid>
+                        )}
                         <Grid item pl={2}>
                             <IconButton onClick={() => onDelete(data.id)}>
                                 <DeleteForeverIcon sx={{ color: "red" }} />

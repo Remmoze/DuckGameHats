@@ -8,7 +8,7 @@ import {
 } from "./MetaPixelTypes.js";
 
 const Metapixels = {
-    0: new BoolMetaPixel(0, "Hat Is Tail", "Enables hat offset"),
+    //0: new BoolMetaPixel(0, "Hat Is Tail", "Enables hat offset"),
     1: new Vector2MetaPixel(1, "Hat Offset", "Hat offset position in pixels"),
     2: new BoolMetaPixel(
         2,
