@@ -6,7 +6,7 @@ import TeamSettings from "./TeamSettings";
 
 const Team = ({ data, onDelete, showbase, showDuck }) => {
     const [disabled] = useState(data === null);
-    const [name, setName] = useState("");
+    const [name, setName] = useState(data === null ? "Default hat" : data.name);
 
     return (
         <Box

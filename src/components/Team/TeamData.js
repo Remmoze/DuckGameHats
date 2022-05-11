@@ -32,6 +32,7 @@ const createTeam = async (imgURL, file) => {
 
     return {
         id: imgURL,
+        name: file.name.split(".")[0],
         url: imgURL,
         image: img,
         fileBase64: stream,
