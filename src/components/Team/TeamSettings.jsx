@@ -6,7 +6,7 @@ import fileDownload from "js-file-download";
 
 import { GenerateHatFile, makeSafeName } from "../HatManipulation/GenerateHat";
 import { useState } from "react";
-import MetaPixelsBackdrop from "../HatManipulation/MetaPixelsBackdrop";
+import MetaPixelsDialog from "../HatManipulation/MetaPixelsDialog";
 
 const SaveHat = (name, data) => {
     name = makeSafeName(name);
@@ -18,7 +18,7 @@ const SaveHat = (name, data) => {
 };
 
 const TeamSettings = ({ name, setName, disabled, onDelete, data }) => {
-    const [showBackdrop, setShowBackdrop] = useState(false);
+    const [showDialog, setShowDialog] = useState(false);
 
     return (
         <Grid container direction="row" justifyContent="space-between" alignItems="flex-end">
@@ -49,10 +49,10 @@ const TeamSettings = ({ name, setName, disabled, onDelete, data }) => {
                             </Button>
                         </Grid>
                         <Grid item pl={1}>
-                            <IconButton onClick={() => setShowBackdrop(true)}>
+                            <IconButton onClick={() => setShowDialog(true)}>
                                 <InfoIcon sx={{ color: "#eee" }} />
                             </IconButton>
-                            <MetaPixelsBackdrop {...{ name, showBackdrop, setShowBackdrop, image: data.image }} />
+                            <MetaPixelsDialog {...{ name, showDialog, setShowDialog, image: data.image }} />
                         </Grid>
                         <Grid item pl={2}>
                             <IconButton onClick={() => onDelete(data.id)}>
