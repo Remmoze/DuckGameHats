@@ -8,8 +8,8 @@ import { createTeam } from "./components/TeamData";
 function App() {
     const [teams, setTeams] = useState([]);
 
-    const addTeam = async (imageUrl) => {
-        let team = await createTeam(imageUrl);
+    const addTeam = async (imageUrl, file) => {
+        let team = await createTeam(imageUrl, file);
         setTeams((teams) => [...teams, team]);
     };
 

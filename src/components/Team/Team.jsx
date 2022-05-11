@@ -1,4 +1,4 @@
-import { TextField, Box, Grid } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import TeamDisplay from "./TeamDisplay";
 
 import { useState } from "react";

@@ -16,15 +16,25 @@ const getType = (width, height) => {
     return "unknown";
 };
 
-const createTeam = async (imgURL) => {
+const FileStream = (url) => {
+    return new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onload = (e) => resolve(e.target.result);
+        reader.readAsDataURL(url);
+    });
+};
+
+const createTeam = async (imgURL, file) => {
     console.log("Creating new hat:", imgURL);
     let img = await createNewImage(imgURL);
+    let stream = await FileStream(file);
     console.log("Hat type:", getType(img.width, img.height));
 
     return {
         id: imgURL,
         url: imgURL,
         image: img,
+        test: stream,
         type: getType(img.width, img.height),
     };
 };

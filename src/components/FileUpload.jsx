@@ -7,8 +7,9 @@ const FileUploader = ({ onFileUpload }) => {
         let file = target.files[0];
         //check image here
 
+        console.log(file);
         let newUrl = URL.createObjectURL(file);
-        onFileUpload(newUrl);
+        onFileUpload(newUrl, file);
     };
 
     const uploadInputRef = useRef(null);

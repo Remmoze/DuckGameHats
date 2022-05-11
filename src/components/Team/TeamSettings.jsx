@@ -4,6 +4,8 @@ import InfoIcon from "@mui/icons-material/Info";
 
 import fileDownload from "js-file-download";
 
+import { test } from "../HatEncoder/GenerateHat";
+
 const TeamSettings = ({ name, setName, disabled, onDelete, data }) => {
     return (
         <Grid container direction="row" justifyContent="space-between" alignItems="flex-end">
@@ -26,7 +28,7 @@ const TeamSettings = ({ name, setName, disabled, onDelete, data }) => {
                                 size="small"
                                 variant="outlined"
                                 disabled={name === ""}
-                                onClick={() => fileDownload("This is just an example.", name + ".txt")}
+                                onClick={() => fileDownload(test(name, data.test), name + ".hat")}
                             >
                                 Export .hat
                             </Button>
