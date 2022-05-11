@@ -5,8 +5,8 @@ import InfoIcon from "@mui/icons-material/Info";
 import fileDownload from "js-file-download";
 
 import { GenerateHatFile, makeSafeName } from "../HatManipulation/GenerateHat";
-import { extractMetaPixels } from "../HatManipulation/MetaExtraction";
-import { processPixels } from "../HatManipulation/MetaProcessing";
+import { useState } from "react";
+import MetaPixelsBackdrop from "../HatManipulation/MetaPixelsBackdrop";
 
 const SaveHat = (name, data) => {
     name = makeSafeName(name);
@@ -18,6 +18,8 @@ const SaveHat = (name, data) => {
 };
 
 const TeamSettings = ({ name, setName, disabled, onDelete, data }) => {
+    const [showBackdrop, setShowBackdrop] = useState(false);
+
     return (
         <Grid container direction="row" justifyContent="space-between" alignItems="flex-end">
             <Grid item>
@@ -47,13 +49,10 @@ const TeamSettings = ({ name, setName, disabled, onDelete, data }) => {
                             </Button>
                         </Grid>
                         <Grid item pl={1}>
-                            <IconButton
-                                onClick={() => {
-                                    console.log(processPixels(extractMetaPixels(data.image)));
-                                }}
-                            >
+                            <IconButton onClick={() => setShowBackdrop(true)}>
                                 <InfoIcon sx={{ color: "#eee" }} />
                             </IconButton>
+                            <MetaPixelsBackdrop {...{ name, showBackdrop, setShowBackdrop, image: data.image }} />
                         </Grid>
                         <Grid item pl={2}>
                             <IconButton onClick={() => onDelete(data.id)}>

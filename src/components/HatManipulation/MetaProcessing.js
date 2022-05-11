@@ -3,7 +3,6 @@ import Metapixels from "./MetaVault";
 // input: array [ {R, G, B, A}, ...]
 const processPixels = (pixels) => {
     const data = [];
-    console.log(pixels);
     for (const { R, G, B } of pixels) {
         if (!(R in Metapixels)) continue;
 
