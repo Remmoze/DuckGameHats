@@ -6,6 +6,7 @@ import fileDownload from "js-file-download";
 
 import { GenerateHatFile, makeSafeName } from "../HatManipulation/GenerateHat";
 import { extractMetaPixels } from "../HatManipulation/MetaExtraction";
+import { processPixels } from "../HatManipulation/MetaProcessing";
 
 const SaveHat = (name, data) => {
     name = makeSafeName(name);
@@ -48,7 +49,7 @@ const TeamSettings = ({ name, setName, disabled, onDelete, data }) => {
                         <Grid item pl={1}>
                             <IconButton
                                 onClick={() => {
-                                    console.log(extractMetaPixels(data.image));
+                                    console.log(processPixels(extractMetaPixels(data.image)));
                                 }}
                             >
                                 <InfoIcon sx={{ color: "#eee" }} />
