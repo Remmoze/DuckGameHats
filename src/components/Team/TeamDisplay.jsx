@@ -12,6 +12,7 @@ import Example from "../../media/templateVisual.png";
 import Duck from "../../media/template_duck.png";
 import Transparent from "../../media/transparent.png";
 
+const Scale = 5;
 const TeamDisplay = ({ data }) => {
     const showBase = useRecoilValue(showBaseState);
     const showDuck = useRecoilValue(showDuckState);
@@ -32,33 +33,35 @@ const TeamDisplay = ({ data }) => {
     }, [data]);
 
     const canvasUpdate = (context) => {
-        // fix this monster
-
-        if (trans === null || data === null) {
-            context.clearRect(0, 0, context.canvas.width, context.canvas.height);
-        } else {
-            context.drawImage(trans, 0, 0, base.width * 5, base.height * 5);
-        }
-
+        context.clearRect(0, 0, context.canvas.width, context.canvas.height);
         context.imageSmoothingEnabled = false;
-        if (base !== null && (showBase || hatImg === null)) {
-            context.drawImage(base, 0, 0, base.width * 5, base.height * 5);
-        }
-        if (duck !== null && (showDuck || hatImg === null)) {
-            context.drawImage(duck, 0, 0, base.width * 5, base.height * 5);
+
+        if (base === null) return;
+        const width = base.width * Scale;
+        const height = base.height * Scale;
+
+        if (trans !== null) {
+            context.drawImage(trans, 0, 0, width, height);
         }
 
-        if (hatImg !== null && base !== null) {
-            context.drawImage(hatImg, 0, 0, 97, 56, 0, 0, base.width * 5, base.height * 5);
+        if (showBase) {
+            context.drawImage(base, 0, 0, width, height);
+        }
+        if (duck !== null && showDuck) {
+            context.drawImage(duck, 0, 0, width, height);
+        }
+
+        if (hatImg !== null) {
+            context.drawImage(hatImg, 0, 0, 97, 56, 0, 0, width, height);
             if (showBase) {
-                context.lineWidth = 2;
-                context.strokeStyle = "#FFF0F0";
-                context.strokeRect(0, 0, hatImg.width * 5, hatImg.height * 5);
+                context.lineWidth = 1;
+                context.strokeStyle = "#FFF0F0AA";
+                context.strokeRect(0, 0, hatImg.width * Scale, hatImg.height * Scale);
             }
         }
     };
 
-    return <Canvas width={base?.width * 5 || 485} height={base?.height * 5 || 280} update={canvasUpdate} />;
+    return <Canvas width={base?.width * Scale || 485} height={base?.height * Scale || 280} update={canvasUpdate} />;
 };
 
 export default TeamDisplay;

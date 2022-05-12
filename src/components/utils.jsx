@@ -8,4 +8,14 @@ const createNewImage = (newUrl) => {
     });
 };
 
-export { createNewImage };
+const makeSafeName = (name) => {
+    return name
+        .toLowerCase()
+        .replace(/[^0-9a-z ]/g, "")
+        .split(" ")
+        .filter((x) => x.length > 0)
+        .map((s) => s[0].toUpperCase() + s.substring(1))
+        .join("");
+};
+
+export { createNewImage, makeSafeName };

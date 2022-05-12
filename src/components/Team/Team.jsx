@@ -1,4 +1,4 @@
-import { Box, Grid } from "@mui/material";
+import { Box, Divider, Grid } from "@mui/material";
 
 import TeamDisplay from "./TeamDisplay";
 import TeamSettings from "./TeamSettings";
@@ -8,7 +8,7 @@ const Team = ({ data }) => {
         <Box
             sx={{
                 padding: 1,
-                borderWidth: "1px 1px 1px 1px",
+                borderWidth: "1px",
                 borderStyle: "solid",
                 borderColor: "#333",
                 backgroundColor: "#252526",
@@ -18,10 +18,8 @@ const Team = ({ data }) => {
                 <Grid item>
                     <TeamSettings data={data} />
                 </Grid>
-                <Grid item>
-                    <Box mt={1} sx={{ border: "1px solid #000" }}>
-                        <TeamDisplay data={data} />
-                    </Box>
+                <Grid item mt={1} mb={-0.5}>
+                    <TeamDisplay data={data} />
                 </Grid>
             </Grid>
         </Box>

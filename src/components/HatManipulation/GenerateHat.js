@@ -14,16 +14,6 @@ const fromString = (str) => str.split("").map((char) => char.charCodeAt(0));
 
 const dataURLToBase64 = (dataURL) => dataURL.substring(dataURL.indexOf(",") + 1);
 
-const makeSafeName = (name) => {
-    return name
-        .toLowerCase()
-        .replace(/[^0-9a-z ]/g, "")
-        .split(" ")
-        .filter((x) => x.length > 0)
-        .map((s) => s[0].toUpperCase() + s.substring(1))
-        .join("");
-};
-
 const getIntBytes = (x) => {
     const bytes = [];
     for (let i = 3; i >= 0; i--) {
@@ -57,4 +47,4 @@ const GenerateHatFile = (name, type, imageUrl) => {
     return new Blob([new Uint8Array(GenerateHatContent(name, type, imageUrl))], { type: "application/octet-stream" });
 };
 
-export { GenerateHatFile, makeSafeName };
+export { GenerateHatFile };

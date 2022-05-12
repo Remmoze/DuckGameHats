@@ -9,8 +9,9 @@ import InfoIcon from "@mui/icons-material/Info";
 
 import fileDownload from "js-file-download";
 
-import { GenerateHatFile, makeSafeName } from "../HatManipulation/GenerateHat";
+import { GenerateHatFile } from "../HatManipulation/GenerateHat";
 import MetaPixelsDialog from "../HatManipulation/MetaPixelsDialog";
+import { makeSafeName } from "../utils";
 
 const SaveHat = (name, data) => {
     name = makeSafeName(name);
@@ -23,7 +24,7 @@ const SaveHat = (name, data) => {
 
 const TeamSettings = ({ data }) => {
     const [disabled] = useState(data === null);
-    const [name, setName] = useState(data === null ? "Default hat" : data.name);
+    const [name, setName] = useState(disabled ? "Default hat" : data.name);
     const setTeams = useSetRecoilState(teamsState);
 
     const [showDialog, setShowDialog] = useState(false);
