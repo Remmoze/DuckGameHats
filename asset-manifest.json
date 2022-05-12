@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/DuckGameHats/static/js/main.5a95805a.js",
+    "main.js": "/DuckGameHats/static/js/main.e0b85b62.js",
     "index.html": "/DuckGameHats/index.html",
-    "main.5a95805a.js.map": "/DuckGameHats/static/js/main.5a95805a.js.map"
+    "main.e0b85b62.js.map": "/DuckGameHats/static/js/main.e0b85b62.js.map"
   },
   "entrypoints": [
-    "static/js/main.5a95805a.js"
+    "static/js/main.e0b85b62.js"
   ]
 }
