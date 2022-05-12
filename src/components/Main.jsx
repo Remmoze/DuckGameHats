@@ -1,5 +1,5 @@
-import { Grid } from "@mui/material";
-import { Box } from "@mui/system";
+import { Grid, Box } from "@mui/material";
+
 import Menu from "./Menu";
 import TeamsList from "./Team/TeamsList";
 

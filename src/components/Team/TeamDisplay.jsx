@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
-import Canvas from "../Canvas";
-import { createNewImage } from "../utils";
+
 import { useRecoilValue } from "recoil";
 import { showBaseState, showDuckState } from "../../atoms";
+
+import Canvas from "../Canvas";
+import { createNewImage } from "../utils";
 
 // 97 56
 import Template from "../../media/colors_only.png";

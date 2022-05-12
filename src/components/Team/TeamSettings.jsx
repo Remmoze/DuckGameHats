@@ -1,3 +1,8 @@
+import { useState } from "react";
+
+import { useSetRecoilState } from "recoil";
+import { teamsState } from "../../atoms";
+
 import { Button, Grid, IconButton, TextField } from "@mui/material";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import InfoIcon from "@mui/icons-material/Info";
@@ -5,7 +10,6 @@ import InfoIcon from "@mui/icons-material/Info";
 import fileDownload from "js-file-download";
 
 import { GenerateHatFile, makeSafeName } from "../HatManipulation/GenerateHat";
-import { useState } from "react";
 import MetaPixelsDialog from "../HatManipulation/MetaPixelsDialog";
 
 const SaveHat = (name, data) => {
@@ -17,8 +21,16 @@ const SaveHat = (name, data) => {
     fileDownload(file, name + ".hat");
 };
 
-const TeamSettings = ({ name, setName, disabled, onDelete, data }) => {
+const TeamSettings = ({ data }) => {
+    const [disabled] = useState(data === null);
+    const [name, setName] = useState(data === null ? "Default hat" : data.name);
+    const setTeams = useSetRecoilState(teamsState);
+
     const [showDialog, setShowDialog] = useState(false);
+
+    const onDelete = () => {
+        setTeams((teams) => teams.filter((team) => team.id !== data.id));
+    };
 
     return (
         <Grid container direction="row" justifyContent="space-between" alignItems="flex-end">
@@ -57,7 +69,7 @@ const TeamSettings = ({ name, setName, disabled, onDelete, data }) => {
                             </Grid>
                         )}
                         <Grid item pl={2}>
-                            <IconButton onClick={() => onDelete(data.id)}>
+                            <IconButton onClick={onDelete}>
                                 <DeleteForeverIcon sx={{ color: "red" }} />
                             </IconButton>
                         </Grid>

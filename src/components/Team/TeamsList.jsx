@@ -1,7 +1,9 @@
-import Team from "./Team";
-import { Grid } from "@mui/material";
-import { useRecoilValue } from "recoil";
 import { teamsState } from "../../atoms";
+import { useRecoilValue } from "recoil";
+
+import { Grid } from "@mui/material";
+
+import Team from "./Team";
 
 const TeamsList = ({ onDelete }) => {
     const teams = useRecoilValue(teamsState);

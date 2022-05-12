@@ -1,5 +1,7 @@
-import { Dialog, DialogTitle, DialogContent, DialogActions, Divider, Typography, Button } from "@mui/material";
 import { useState, Fragment } from "react";
+
+import { Dialog, DialogTitle, DialogContent, DialogActions, Divider, Typography, Button } from "@mui/material";
+
 import { extractMetaPixels } from "./MetaExtraction";
 import { processPixels } from "./MetaProcessing";
 

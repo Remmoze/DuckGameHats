@@ -1,7 +1,9 @@
-import { Button, Grid, Checkbox, Typography } from "@mui/material";
-import FileUploader from "./FileUpload";
 import { useSetRecoilState, useRecoilState } from "recoil";
 import { teamsState, showBaseState, showDuckState } from "../atoms";
+
+import { Button, Grid, Checkbox, Typography } from "@mui/material";
+
+import FileUploader from "./FileUpload";
 import { createTeam } from "./Team/TeamData";
 
 const Menu = () => {

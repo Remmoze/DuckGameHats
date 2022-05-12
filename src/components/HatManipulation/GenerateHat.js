@@ -58,28 +58,3 @@ const GenerateHatFile = (name, type, imageUrl) => {
 };
 
 export { GenerateHatFile, makeSafeName };
-
-/*
-function generateHatFile(team) {
-  var iv = generateIV();
-  var xIV = toStr(iv);
-  var encData = [];
-  var useMagicNo = hatMagicNo;
-  if (team.texture.width == 96) {
-    useMagicNo = hatCapeMagicNo;
-  }
-  encData = encData.concat(useMagicNo);
-  var teamBytes = fromStr(team.tile.children[0].children[0].value);
-  encData = encData.concat([teamBytes.length]);
-  encData = encData.concat(teamBytes);
-  var imageBytes = fromStr(atob(dataURLToBase64(team.data)));
-  encData = encData.concat(getIntBytes(imageBytes.length));
-  encData = encData.concat(imageBytes);
-  var saveData = [];
-  var ivlen = iv.length;
-  saveData = saveData.concat(getIntBytes(iv.length));
-  saveData = saveData.concat(iv);
-  saveData = saveData.concat(doEncrypt(encData, iv, key));
-  return saveData;
-}
-*/
