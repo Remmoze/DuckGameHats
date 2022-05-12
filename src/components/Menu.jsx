@@ -1,7 +1,23 @@
 import { Button, Grid, Checkbox, Typography } from "@mui/material";
 import FileUploader from "./FileUpload";
+import { useSetRecoilState, useRecoilState } from "recoil";
+import { teamsState, showBaseState, showDuckState } from "../atoms";
+import { createTeam } from "./Team/TeamData";
 
-const Menu = ({ addTeam, deleteAll, showbase, setShowBase, showDuck, setShowDuck }) => {
+const Menu = () => {
+    const setTeams = useSetRecoilState(teamsState);
+    const [showBase, setShowBase] = useRecoilState(showBaseState);
+    const [showDuck, setShowDuck] = useRecoilState(showDuckState);
+
+    const addTeam = async (imgUrl, file) => {
+        let team = await createTeam(imgUrl, file);
+        setTeams((teams) => [...teams, team]);
+    };
+
+    const deleteAll = () => {
+        setTeams([]);
+    };
+
     return (
         <Grid container direction="column" justifyContent="flex-start" alignItems="flex-end" spacing={1}>
             <Grid item>
@@ -20,7 +36,7 @@ const Menu = ({ addTeam, deleteAll, showbase, setShowBase, showDuck, setShowDuck
                         </Typography>
                     </Grid>
                     <Grid item>
-                        <Checkbox checked={showbase} onChange={(e, value) => setShowBase(value)} />
+                        <Checkbox checked={showBase} onChange={(e, value) => setShowBase(value)} />
                     </Grid>
                 </Grid>
             </Grid>

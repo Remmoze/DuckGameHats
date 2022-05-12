@@ -4,9 +4,18 @@ import TeamDisplay from "./TeamDisplay";
 import { useState } from "react";
 import TeamSettings from "./TeamSettings";
 
-const Team = ({ data, onDelete, showbase, showDuck }) => {
+import { useSetRecoilState } from "recoil";
+import { teamsState } from "../../atoms";
+
+const Team = ({ data }) => {
     const [disabled] = useState(data === null);
     const [name, setName] = useState(data === null ? "Default hat" : data.name);
+
+    const setTeams = useSetRecoilState(teamsState);
+
+    const onDelete = () => {
+        setTeams((teams) => teams.filter((team) => team.id !== data.id));
+    };
 
     return (
         <Box
@@ -24,7 +33,7 @@ const Team = ({ data, onDelete, showbase, showDuck }) => {
                 </Grid>
                 <Grid item>
                     <Box mt={1} sx={{ border: "1px solid #000" }}>
-                        <TeamDisplay {...{ showbase, showDuck }} data={data || null} />
+                        <TeamDisplay data={data} />
                     </Box>
                 </Grid>
             </Grid>

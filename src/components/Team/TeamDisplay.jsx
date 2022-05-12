@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import Canvas from "../Canvas";
 import { createNewImage } from "../utils";
+import { useRecoilValue } from "recoil";
+import { showBaseState, showDuckState } from "../../atoms";
 
 // 97 56
 import Template from "../../media/colors_only.png";
@@ -8,7 +10,9 @@ import Example from "../../media/templateVisual.png";
 import Duck from "../../media/template_duck.png";
 import Transparent from "../../media/transparent.png";
 
-const TeamDisplay = ({ data, showbase, showDuck }) => {
+const TeamDisplay = ({ data }) => {
+    const showBase = useRecoilValue(showBaseState);
+    const showDuck = useRecoilValue(showDuckState);
     const [base, setBase] = useState(null);
     const [duck, setDuck] = useState(null);
     const [hatImg, setHatImg] = useState(null);
@@ -26,6 +30,8 @@ const TeamDisplay = ({ data, showbase, showDuck }) => {
     }, [data]);
 
     const canvasUpdate = (context) => {
+        // fix this monster
+
         if (trans === null || data === null) {
             context.clearRect(0, 0, context.canvas.width, context.canvas.height);
         } else {
@@ -33,16 +39,16 @@ const TeamDisplay = ({ data, showbase, showDuck }) => {
         }
 
         context.imageSmoothingEnabled = false;
-        if (base !== null && (showbase || hatImg === null)) {
+        if (base !== null && (showBase || hatImg === null)) {
             context.drawImage(base, 0, 0, base.width * 5, base.height * 5);
         }
         if (duck !== null && (showDuck || hatImg === null)) {
             context.drawImage(duck, 0, 0, base.width * 5, base.height * 5);
         }
 
-        if (hatImg !== null) {
+        if (hatImg !== null && base !== null) {
             context.drawImage(hatImg, 0, 0, 97, 56, 0, 0, base.width * 5, base.height * 5);
-            if (showbase) {
+            if (showBase) {
                 context.lineWidth = 2;
                 context.strokeStyle = "#FFF0F0";
                 context.strokeRect(0, 0, hatImg.width * 5, hatImg.height * 5);

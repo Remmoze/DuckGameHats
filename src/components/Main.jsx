@@ -1,28 +1,9 @@
 import { Grid } from "@mui/material";
 import { Box } from "@mui/system";
-import { useState } from "react";
 import Menu from "./Menu";
 import TeamsList from "./Team/TeamsList";
-import { createTeam } from "./Team/TeamData";
 
 const Main = () => {
-    const [teams, setTeams] = useState([]);
-    const [showbase, setShowBase] = useState(true);
-    const [showDuck, setShowDuck] = useState(true);
-
-    const addTeam = async (imageUrl, file) => {
-        let team = await createTeam(imageUrl, file);
-        setTeams((teams) => [...teams, team]);
-    };
-
-    const deleteTeam = (id) => {
-        setTeams((teams) => teams.filter((team) => team.id !== id));
-    };
-
-    const deleteAll = () => {
-        setTeams([]);
-    };
-
     return (
         <>
             <Grid
@@ -33,7 +14,7 @@ const Main = () => {
                 rowSpacing={2}
                 columnSpacing={2}
             >
-                <TeamsList {...{ teams, showbase, showDuck }} onDelete={deleteTeam} />
+                <TeamsList />
             </Grid>
             <Box
                 sx={{
@@ -42,7 +23,7 @@ const Main = () => {
                     right: 15,
                 }}
             >
-                <Menu {...{ addTeam, deleteAll, showbase, setShowBase, showDuck, setShowDuck }} />
+                <Menu />
             </Box>
         </>
     );

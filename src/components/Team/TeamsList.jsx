@@ -1,7 +1,11 @@
 import Team from "./Team";
 import { Grid } from "@mui/material";
+import { useRecoilValue } from "recoil";
+import { teamsState } from "../../atoms";
 
-const TeamsList = ({ teams, showbase, showDuck, onDelete }) => {
+const TeamsList = ({ onDelete }) => {
+    const teams = useRecoilValue(teamsState);
+
     if (teams.length === 0) {
         return (
             <Grid item>
@@ -14,7 +18,7 @@ const TeamsList = ({ teams, showbase, showDuck, onDelete }) => {
         <>
             {teams.map((team) => (
                 <Grid item key={team.id}>
-                    <Team {...{ showbase, showDuck }} data={team} onDelete={onDelete} />
+                    <Team data={team} onDelete={onDelete} />
                 </Grid>
             ))}
         </>
