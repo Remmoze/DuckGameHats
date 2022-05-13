@@ -18,6 +18,8 @@ const Menu = () => {
         } else if (type === "hat") {
             let team = await createTeamFromHatFile(blobURL);
             setTeams((teams) => [...teams, team]);
+        } else {
+            console.error("Invalid hat type");
         }
     };
 
