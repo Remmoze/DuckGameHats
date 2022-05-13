@@ -4,16 +4,21 @@ import { teamsState, showBaseState, showDuckState } from "../atoms";
 import { Button, Grid, Checkbox, Typography } from "@mui/material";
 
 import FileUploader from "./FileUpload";
-import { createTeam } from "./Team/TeamData";
+import { createTeam, createTeamFromHatFile } from "./Team/TeamData";
 
 const Menu = () => {
     const setTeams = useSetRecoilState(teamsState);
     const [showBase, setShowBase] = useRecoilState(showBaseState);
     const [showDuck, setShowDuck] = useRecoilState(showDuckState);
 
-    const addTeam = async (imgUrl, file) => {
-        let team = await createTeam(imgUrl, file);
-        setTeams((teams) => [...teams, team]);
+    const addTeam = async (blobURL, file, type) => {
+        if (type === "png") {
+            let team = await createTeam(blobURL, file);
+            setTeams((teams) => [...teams, team]);
+        } else if (type === "hat") {
+            let team = await createTeamFromHatFile(blobURL);
+            setTeams((teams) => [...teams, team]);
+        }
     };
 
     const deleteAll = () => {

@@ -1,3 +1,4 @@
+import { decryptHat } from "../HatManipulation/HatCipher";
 import { createNewImage } from "../utils";
 
 const getType = (width, height) => {
@@ -27,7 +28,8 @@ const readAsDataURL = (url) => {
 const createTeam = async (imgURL, file) => {
     console.log("Creating new hat:", imgURL);
     const img = await createNewImage(imgURL);
-    const stream = await readAsDataURL(file);
+    const blob = await fetch(imgURL).then((r) => r.blob());
+    const stream = await readAsDataURL(blob);
     console.log("Hat type:", getType(img.width, img.height));
 
     return {
@@ -40,4 +42,25 @@ const createTeam = async (imgURL, file) => {
     };
 };
 
-export { createTeam };
+const createTeamFromHatFile = async (blobUrl, file) => {
+    let data = new Uint8Array(await fetch(blobUrl).then((data) => data.arrayBuffer()));
+    console.log(data);
+    let { url, name } = decryptHat(data);
+
+    console.log("Creating new hat from .hat:", url);
+    const img = await createNewImage(url);
+    const blob = await fetch(url).then((r) => r.blob());
+    const stream = await readAsDataURL(blob);
+    console.log("Hat type:", getType(img.width, img.height));
+
+    return {
+        id: url,
+        name: name,
+        url: url,
+        image: img,
+        fileBase64: stream,
+        type: getType(img.width, img.height),
+    };
+};
+
+export { createTeam, createTeamFromHatFile };
