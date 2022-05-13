@@ -1,4 +1,4 @@
-import { Box, Divider, Grid } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 
 import TeamDisplay from "./TeamDisplay";
 import TeamSettings from "./TeamSettings";
