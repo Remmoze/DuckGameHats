@@ -6,21 +6,10 @@ import { teamsState } from "../../atoms";
 import { Button, Grid, IconButton, TextField } from "@mui/material";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import InfoIcon from "@mui/icons-material/Info";
+import DownloadIcon from "@mui/icons-material/Download";
 
-import fileDownload from "js-file-download";
-
-import { GenerateHatFile } from "../HatManipulation/GenerateHat";
+import { SaveHatFile, SavePngFile } from "../HatManipulation/GenerateHat";
 import MetaPixelsDialog from "../HatManipulation/MetaPixelsDialog";
-import { makeSafeName } from "../utils";
-
-const SaveHat = (name, data) => {
-    name = makeSafeName(name);
-    if (name.trim() === "") {
-        name = makeSafeName(Math.random().toString(16).substring(8));
-    }
-    let file = GenerateHatFile(name, data.type, data.fileBase64);
-    fileDownload(file, name + ".hat");
-};
 
 const TeamSettings = ({ data }) => {
     const [disabled] = useState(data === null);
@@ -56,9 +45,21 @@ const TeamSettings = ({ data }) => {
                                 size="small"
                                 variant="outlined"
                                 disabled={name === ""}
-                                onClick={() => SaveHat(name, data)}
+                                startIcon={<DownloadIcon />}
+                                onClick={() => SaveHatFile(name, data)}
                             >
-                                Export .hat
+                                .hat
+                            </Button>
+                        </Grid>
+                        <Grid item>
+                            <Button
+                                size="small"
+                                variant="outlined"
+                                disabled={name === ""}
+                                startIcon={<DownloadIcon />}
+                                onClick={() => SavePngFile(name, data)}
+                            >
+                                .png
                             </Button>
                         </Grid>
                         {data.type === "full" && (
