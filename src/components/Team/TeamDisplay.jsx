@@ -8,7 +8,7 @@ import { createNewImage } from "../utils";
 
 // 97 56
 import Template from "../../media/colors_only.png";
-import Example from "../../media/templateVisual.png";
+import Example from "../../media/template_hints.png";
 import Duck from "../../media/template_duck.png";
 import Transparent from "../../media/transparent.png";
 
