@@ -1,6 +1,7 @@
 import Main from "./components/Main";
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from "@mui/material";
 import { useState } from "react";
+import Footer from "./components/Footer";
 
 function App() {
     const [showWelcome, setShowWelcome] = useState(window.location.hostname !== "localhost");
@@ -14,6 +15,7 @@ function App() {
                 </DialogActions>
             </Dialog>
             <Main />
+            <Footer />
         </>
     );
 }
